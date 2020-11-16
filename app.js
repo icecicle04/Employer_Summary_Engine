@@ -52,6 +52,38 @@ function init() {
     });
 }
 
+function addEmployee() {
+  console.log("Lets add an employee!");
+  console.log("---------------------");
+  inquirer
+    .prompt([
+      {
+        name: "action",
+        type: "rawlist",
+        message: "What type of employee would you like to add?",
+        choices: ["Intern", "Engineer", "Manager"],
+      },
+    ])
+    .then(function (answer) {
+      switch (answer.action) {
+        case "Intern":
+          addIntern();
+          break;
+
+        case "Engineer":
+          addEngineer();
+          break;
+
+        case "Manager":
+          addManager();
+          break;
+      }
+    })
+    .catch((err) => {
+      if (err) throw err;
+    });
+}
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
