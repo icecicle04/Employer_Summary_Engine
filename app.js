@@ -5,11 +5,52 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const mysql = require("mysql");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+
+const connection = mysql.createConnection({
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "Braves2020",
+  database: "employees_db",
+});
+
+connection.connect((err) => {
+  if (err) throw err;
+  console.log("Employee Directory");
+  init();
+});
+function init() {
+  console.log("---------");
+  inquirer
+    .prompt([
+      {
+        name: "action",
+        type: "rawlist",
+        message: "What would you like to do?",
+        choices: ["Add Employee", "View Employees"],
+      },
+    ])
+    .then(function (answer) {
+      switch (answer.action) {
+        case "Add Employee":
+          addEmployee();
+          break;
+
+        case "View Employees":
+          viewEmployees();
+          break;
+      }
+    })
+    .catch((err) => {
+      if (err) throw err;
+    });
+}
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
