@@ -43,7 +43,7 @@ function init() {
           break;
 
         case "View Employees":
-          viewEmployees();
+          render();
           break;
       }
     })
@@ -83,6 +83,20 @@ function addEmployee() {
       if (err) throw err;
     });
 }
+
+function addIntern() {
+  inquirer.prompt([
+    {
+      name: "employee_first_name",
+      type: "input",
+      message: "What is the employees first name?",
+    },
+  ]);
+}
+
+function addEngineer() {}
+
+function addManager() {}
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
