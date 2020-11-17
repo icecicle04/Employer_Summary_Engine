@@ -94,7 +94,35 @@ function addIntern() {
   ]);
 }
 
-function addEngineer() {}
+function addEngineer() {
+    inquirer
+    .prompt([
+        {
+            name: "name",
+            type: "input",
+            message: "What is the employee's name?",
+        },
+        {
+            name: "id",
+            type: "input",
+            message: "What is the employee's id?",
+        },
+        {
+            name: "email",
+            type: "input",
+            message: "What is the employee's email?",
+        },
+        {
+            name: "gitHub",
+            type: "input",
+            message: "What is the employee's gitHub?",
+        }
+    ]).then(function)(data) {
+        var newEngineer = new Engineer(data.engineerName, data.id, data.email, data.gitHub);
+        team.push(newEngineer);
+        render();
+    }
+}
 
 function addManager() {}
 
