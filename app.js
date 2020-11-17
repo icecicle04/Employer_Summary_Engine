@@ -11,7 +11,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
+const team = [];
 const connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
@@ -95,33 +95,39 @@ function addIntern() {
 }
 
 function addEngineer() {
-    inquirer
+  inquirer
     .prompt([
-        {
-            name: "name",
-            type: "input",
-            message: "What is the employee's name?",
-        },
-        {
-            name: "id",
-            type: "input",
-            message: "What is the employee's id?",
-        },
-        {
-            name: "email",
-            type: "input",
-            message: "What is the employee's email?",
-        },
-        {
-            name: "gitHub",
-            type: "input",
-            message: "What is the employee's gitHub?",
-        }
-    ]).then(function)(data) {
-        var newEngineer = new Engineer(data.engineerName, data.id, data.email, data.gitHub);
-        team.push(newEngineer);
-        render();
-    }
+      {
+        name: "name",
+        type: "input",
+        message: "What is the employee's name?",
+      },
+      {
+        name: "id",
+        type: "input",
+        message: "What is the employee's id?",
+      },
+      {
+        name: "email",
+        type: "input",
+        message: "What is the employee's email?",
+      },
+      {
+        name: "gitHub",
+        type: "input",
+        message: "What is the employee's gitHub?",
+      },
+    ])
+    .then(function (data) {
+      var newEngineer = new Engineer(
+        data.engineerName,
+        data.id,
+        data.email,
+        data.gitHub
+      );
+      team.push(newEngineer);
+      render();
+    });
 }
 
 function addManager() {}
